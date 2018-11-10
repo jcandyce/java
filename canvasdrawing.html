@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Drawing Canvas </title>
+    <style>
+        canvas {
+        background-color: #f1f1f1;
+        }
+    </style>
+    
+</head>
+<body onload = "draw()">
+    <main> 
+        <canvas id="canvas" width= "800" height= "500"> </canvas>
+    </main>
+<script>
+var mycanvas = document.getElementById("canvas");
+var ctx = mycanvas.getContext("2d");
+ctx.strokeStyle = "black";
+ctx.lineWidth = 2;
+ctx.lineCap = "round";
+var draw = function(){
+    document.onmousemove = function(d){
+        var x = d.pageX;
+        var y = d.pageY;
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    };
+    document.ontouchmove = function (d) {
+        var x = d.touches[0].screenX;
+        var y = d.touches[0].screenY;
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    }
+};
+
+document.onkeydown = function (d) {
+    if (d.keyCode === 66){
+        ctx.strokeStyle = "blue";
+        ctx.beginPath();
+    }
+    if (d.keyCode === 82){
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+    }
+    if (d.keyCode === 89){
+        ctx.strokeStyle = "yellow";
+        ctx.beginPath();
+    }
+    if (d.keyCode === 71){
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+    }
+    if (d.keyCode === 38){
+        ctx.lineWidth = ctx.lineWidth + 1;
+        ctx.beginPath();
+    }
+    if (d.keyCode === 40){
+        if (ctx.lineWidth < 1){
+            ctx.lineWidth = 1
+        }
+        ctx.lineWidth = ctx.lineWidth - 1;
+        ctx.beginPath();
+    }
+    if (d.keyCode === 32){
+        ctx.clearRect(0,0,800,500);
+        ctx.beginPath();
+    }
+}
+
+</script>
+</body>
+</html>
+
+
+
